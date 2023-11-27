@@ -29,7 +29,7 @@ function App() {
   return (
     // <div className='w-full h-screen bg-no-repeat bg-cover bg-fixed ' style={{backgroundImage: "url(https://img.freepik.com/free-photo/close-up-white-smoky-abstract_53876-148124.jpg?w=740&t=st=1699525908~exp=1699526508~hmac=62fd74f7ba670391b625f317c9fdc58cadc80c8a415962b9ac693d97aed927ad)"}}>
     <NoteState>
-      <BrowserRouter>
+      <BrowserRouter basename="/MyNotebook">
         <Navbar name={name} setName={setName}/>
         <LandingPage/>
         <Alert alert={alert}/>
