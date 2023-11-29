@@ -24,6 +24,7 @@ const NoteItem = (props) => {
    
 const handleClick = async(element) => {
   // element.preventDefault();
+  
  await editNote(notes._id, notes.title, notes.description, notes.tag);
  hideModal();
  console.log(notes._id)

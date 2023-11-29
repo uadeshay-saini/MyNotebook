@@ -1,15 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import NoteContext from '../context/notes/NoteContext'
 import { useNavigate } from 'react-router-dom'
 import liol from './liol.jpg'
 
 const Signup = (props) => {
   const [credentials, setCredentials] = useState({name: "", email:"", password:""})
+  
+  const context = useContext(NoteContext);
+  const { getNotes, loadingGif, setLoadingGif } = context;
+
   let navigate = useNavigate();
 //   const host = "http://localhost:5000"
   const host = "https://mynotebook-backend-2gb6.onrender.com"
 
   const handleClick = async (e)=>{
       e.preventDefault();
+      try{
+          props.setProgress(10)
+        setLoadingGif(true)
+        props.setProgress(40)
       const response = await fetch(`${host}/api/auth/createuser`, {
         method: 'POST',
         headers: {
@@ -17,22 +26,30 @@ const Signup = (props) => {
       },
       body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
       });
+      props.setProgress(60)
     const json = await response.json();
+    props.setProgress(70)
     console.log(json)
     if(json.success){
       //redirect and save the auth token
+      props.setProgress(80)
       localStorage.setItem('token', json.authtoken)
+      setLoadingGif(false)
       navigate("/")
+      props.setProgress(100)
       props.showAlert("teal", "You Have Signed Up Successfully", "Thank God!!")
     }else{
       props.showAlert("red", "You Have Entered Incorrect Details", "Please Act Alive!!")
     }
+    }catch(error){
+        console.error('login error:', error);}
     }
   const onChange = (event) => {
       setCredentials({ ...credentials, [event.target.name]: event.target.value });
     };
   return (
-    <div><div>
+    <div>
+        {loadingGif ? <div></div>: 
     <body>
         <section className="min-h-screen flex items-stretch text-white ">
             <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center" style={{backgroundImage: `url(${liol})`}}>
@@ -113,8 +130,8 @@ const Signup = (props) => {
             </div>
         </section>
     </body>
-    
-        </div></div>
+      }
+        </div>
   )
 }
 

@@ -9,8 +9,8 @@ console.log(location.pathname)
   return (
     <div>
     {location.pathname !== "/" || localStorage.getItem('token') !== null ? <div></div> : 
-    <div className="w-full h-screen bg-no-repeat bg-cover bg-fixed" style={{ backgroundImage: `url(${NBG})`}}>
-  <div className="h-screen flex flex-col md:flex-row items-center justify-center">
+    <div className="w-full  bg-no-repeat bg-cover bg-fixed" style={{ backgroundImage: `url(${NBG})`}}>
+  <div className=" flex flex-col md:flex-row items-center justify-center">
     {/* Left Section with Login/Signup Buttons and Description */}
     <div className="md:w-1/2 text-white text-center md:text-left md:p-12">
       <h1 className="text-3xl md:text-5xl font-bold mb-4">Welcome to MyNotebook</h1>

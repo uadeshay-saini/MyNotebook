@@ -5,10 +5,10 @@ import Notes from './Notes';
 
 const Home=(props) =>{
   let showModal = "false"
-  const {showAlert, setName} = props;
+  const {showAlert, setName, setProgress } = props;
   return (
     <>
-  <Notes setName={setName} showAlert={showAlert}/>
+  <Notes setName={setName} showAlert={showAlert} setProgress={setProgress}/>
   
 </>  
   )

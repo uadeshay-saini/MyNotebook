@@ -8,14 +8,15 @@ import NBG from "./NBG.jpg"
 const Notes = (props) => {
   const context = useContext(NoteContext);
   const { notes, addNotes, getNotes } = context;
-  const { showAlert, setName } = props;
+  const { showAlert, setName, setProgress } = props;
   let navigate = useNavigate();
 
   useEffect(() => {
     if(localStorage.getItem('token')){
-      
+      setProgress(30);
       getNotes();
       setName(localStorage.getItem('name'))
+      setProgress(100);
       console.log(localStorage.getItem('name'))
 
     }else{
@@ -79,9 +80,11 @@ useEffect(() => {
   const handleClick = async (event) => {
     event.preventDefault();
     try {
+      setProgress(30);
       await editNote(note._id, note.etitle, note.edescription, note.etag);
       console.log(note);
       hideModal();
+      setProgress(100);
       props.showAlert("teal", "You Have Updated Your Note Successfully", "Keep Writing!!")
     } catch (error) {
       console.error('Error:', error);

@@ -6,7 +6,7 @@ import liol from './liol.jpg'
 const Login = (props) => {
     
   const context = useContext(NoteContext);
-  const { getNotes } = context;
+  const { getNotes, loadingGif, setLoadingGif } = context;
 
     const [credentials, setCredentials] = useState({email:"", password:""})
     let navigate = useNavigate();
@@ -16,6 +16,10 @@ const Login = (props) => {
     const handleClick = async (e)=>{
         e.preventDefault();
         try{
+            props.setProgress(10)
+            setLoadingGif(true)
+            props.setProgress(40)
+
         const response = await fetch(`${host}/api/auth/login`, {
           method: 'POST',
           headers: {
@@ -23,14 +27,20 @@ const Login = (props) => {
         },
         body: JSON.stringify({email: credentials.email, password: credentials.password})
         });
+        props.setProgress(60)
       const json = await response.json();
+      props.setProgress(70)
       console.log(json)
       if(json.success){
         //redirect and save the auth token
+        props.setProgress(75)
         localStorage.setItem('token', json.authtoken)
         localStorage.setItem('name', json.name)
+        setLoadingGif(false)
+        props.setProgress(80)
         navigate("/")
         getNotes();
+        props.setProgress(100)
         props.setName(json.name)
         props.showAlert("teal", "You Have Logged In Successfully", "Thank God!!")
       }else{
@@ -45,7 +55,8 @@ const Login = (props) => {
         setCredentials({ ...credentials, [event.target.name]: event.target.value });
       };
   return (
-    <div>
+      <div>
+      {loadingGif ? <div></div>: 
     <body>
         <section className="min-h-screen flex items-stretch text-white ">
             <div className="lg:flex w-1/2 hidden bg-gray-500 bg-no-repeat bg-cover relative items-center" style={{backgroundImage: `url(${liol})`}}>
@@ -121,6 +132,7 @@ const Login = (props) => {
         </section>
     </body>
     
+}
     
         </div>
   )

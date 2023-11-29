@@ -10,7 +10,7 @@ const NoteState = (props) => {
 
   const [modalVariable, setModalVariable] = useState("hidden");
   const [addNotesModalVariable, setAddNotesModalVariable] = useState("hidden");
-
+const [loadingGif, setLoadingGif] = useState(false);
 
   //fetching api for the first time
   const getNotes = async ()=>{
@@ -135,7 +135,7 @@ const NoteState = (props) => {
 
 
   return (
-    <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes, modalVariable, setModalVariable, addNotesModalVariable, setAddNotesModalVariable}}>
+    <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote, getNotes, modalVariable, setModalVariable, addNotesModalVariable, setAddNotesModalVariable, loadingGif, setLoadingGif}}>
       {props.children}
     </NoteContext.Provider>
   );
