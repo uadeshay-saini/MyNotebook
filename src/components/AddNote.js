@@ -11,7 +11,7 @@ const AddNote = (props) => {
     element.preventDefault();
     addNote(note.title, note.description, note.tag);
     setNote({ title: "", description: "", tag: "" });
-    props.showAlert("teal", "Your Note Is Added Successfully", "Keep Writing!!")
+    showAlert("teal", "Your Note Is Added Successfully", "Keep Writing!!")
     hideModal();
   };
 
@@ -148,10 +148,10 @@ onClick={ShowModal}
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="w-8 h-8"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  className="w-8 h-8"
 >
   <line x1="12" y1="5" x2="12" y2="19"></line>
   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -163,7 +163,7 @@ onClick={ShowModal}
         id="authentication-modal"
         tabIndex="-1"
         aria-hidden="true"
-        className={`modal ${addNotesModalVariable} fixed top-1/2 left-1/2 transform  z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  backdrop-filter backdrop-blur-lg max-h-full`}
+        className={`modal ${addNotesModalVariable} lg:fixed top-1/2 left-1/2 transform  z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  backdrop-filter backdrop-blur-lg max-h-full`}
       >
         <div className="relative w-full max-w-md mx-auto">
           <div className="relative bg-black-800 rounded-lg  dark:bg-gray-700">

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect} from "react";
+import React, { useContext, useState} from "react";
 import NoteContext from "../context/notes/NoteContext";
 
 const Modal = (props) => {

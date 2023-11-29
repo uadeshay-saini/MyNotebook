@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from "react";
 import NoteContext from "../context/notes/NoteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
-import Modal from "./Modal";
 import NBG from "./NBG.jpg"
 const Notes = (props) => {
   const context = useContext(NoteContext);
-  const { notes, addNotes, getNotes } = context;
+  const { notes, getNotes } = context;
   const { showAlert, setName, setProgress } = props;
-  let navigate = useNavigate();
 
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -17,7 +14,7 @@ const Notes = (props) => {
       getNotes();
       setName(localStorage.getItem('name'))
       setProgress(100);
-      console.log(localStorage.getItem('name'))
+      // console.log(localStorage.getItem('name'))
 
     }else{
       
@@ -28,7 +25,7 @@ const Notes = (props) => {
   }, []);
 
   // from NOTE ITEMS
-  const { deleteNote, modalVariable, setModalVariable, editNote } = context;
+  const {  modalVariable, setModalVariable, editNote } = context;
 
   let [note, setNote] = useState({
     _id: "",
@@ -37,12 +34,11 @@ const Notes = (props) => {
     etag: "default",
   });
 
-  let y ={};
 
 let x = 2;
 useEffect(() => {
   // This code will run when the 'note' state is updated.
-  console.log(note._id);
+  // console.log(note._id);
 }, [note]);
 
   const updateNote = (currentNote) => {
@@ -54,10 +50,6 @@ useEffect(() => {
         etag: currentNote.tag,
       });
     }
-      console.log(note);
-      console.log(currentNote);
-      console.log(y);
-      
       
       ShowModal();
     };
@@ -93,10 +85,7 @@ useEffect(() => {
   };
 
   const ShowModal = async (element) => {
-    // setNote({id:element._id, title: element.title, description: element.description, tag: element.tag })
-    // console.log(element)
-    // console.log(element._id)
-
+   
     setModalVariable("");
   };
 
@@ -123,7 +112,7 @@ useEffect(() => {
         id="authentication-modal"
         tabIndex="-1"
         aria-hidden="true"
-        className={`modal ${modalVariable} fixed top-1/2 left-1/2 transform  z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  backdrop-filter backdrop-blur-lg max-h-full`}
+        className={`modal ${modalVariable} lg:fixed top-1/2 left-1/2 transform  z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  backdrop-filter backdrop-blur-lg max-h-full`}
       >
         <div className="relative w-full max-w-md mx-auto">
           <div className="relative bg-black-800 rounded-lg  dark:bg-gray-700">

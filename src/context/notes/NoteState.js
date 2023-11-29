@@ -1,5 +1,5 @@
 import NoteContext from "./NoteContext";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 const NoteState = (props) => {
   // const host = "http://localhost:5000"
@@ -63,6 +63,7 @@ const [loadingGif, setLoadingGif] = useState(false);
       }}
     );
     const json = response.json();
+    console.log(json)
     // console.log(json)
     const newNotes = notes.filter((note)=>{return note._id!==id})
     setNotes(newNotes)
